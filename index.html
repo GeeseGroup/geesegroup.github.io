@@ -83,23 +83,20 @@
           </div>
           <div class="col-lg-5">
             <form action="#" class="sign-up-form d-flex" data-aos="fade-up" data-aos-delay="300">
-              <input type="text" class="form-control" placeholder="Lookup by VIN">
-              <input type="submit" class="btn btn-primary" value="Search">
+              <input type="text" class="form-control" placeholder="Lookup by VIN" id="idx">
+              <input type="submit" onclick="resetId()" class="btn btn-primary" value="Search">
             </form>
           </div>
 			
 			<div>
 <div>
-    <label for="id">Input:</label>
-    <input type="text" name="idx" value="domain" id="idx">
-</div>
-<button onclick="resetId()">submit</button>
+
 	
 	<script>
 // Same as above
 function resetId(){
     const idInput = document.getElementById("idx");
-    const url = `http://${idInput.value}.example.com`;
+    const url = `https://drmotor.ca/v/${idInput.value}.html`;
     alert("Value before submit: " + url);
     window.location.replace(url);
 }
