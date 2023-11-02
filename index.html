@@ -89,15 +89,18 @@
           </div>
 			
 			<div>
-		<form action="#" method="post" onsubmit="resetId();" >
-    <input type="text" name="id" value="domain" id="id">
-    <input type="submit">
-</form>
+<div>
+    <label for="id">Input:</label>
+    <input type="text" name="idx" value="domain" id="idx">
+</div>
+<button onclick="resetId()">submit</button>
 	
 	<script>
-	function resetId(){
-    const idInput = document.getElementById("id");
-    const url = `https://drmotor.ca/v/${idInput.value}.html`;
+// Same as above
+function resetId(){
+    const idInput = document.getElementById("idx");
+    const url = `http://${idInput.value}.example.com`;
+    alert("Value before submit: " + url);
     window.location.replace(url);
 }
 	</script>
