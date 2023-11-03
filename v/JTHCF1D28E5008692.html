@@ -68,93 +68,43 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
 
-    <!-- Services Details Page Title & Breadcrumbs -->
-    <div data-aos="fade" class="page-title">
-      <div class="heading">
 
-      </div>
+<div class="container">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-    </div><!-- End Page Title -->
-<style>
-	.data-portal{
-		margin-left: 20px;
-		margin-right: 20px;
-	}
-</style>
-	  <section class="data-portal">
-	  <div class="accordion accordion-flush" id="accordionFlushExample">
+	  <div class="row">
+    <div class="col-md-6">
+<img src="../image/lexus3is.png" alt="vehicle" width="100%">
+    </div>
+
+    <div class="col-md-6">
+      <p class="vname">2014 LEXUS IS250</p>
+	<p><strong>VIN: </strong><span id="vin"></span></p>
+	<p><strong>Plate: </strong><span id="plate"></span></p>
+  <p><strong>Last recorded millage: </strong><span id="lastKm"></span></p>
+
+  </div>
+
+	<div class="accordion" id="accordionExample">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Accordion Item #1
+    <h2 class="accordion-header" id="headingFour">
+      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+        Maintenance Dashboard
       </button>
     </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">        
-		</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingThree">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Service History
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">        <table class="table table-bordered" id="history">
-		
-
-        </table></div>
-    </div>
-  </div>
-</div>
-	  </section>
-	  
-	  
-    <!-- Service-details Section - Services Details Page -->
-    <section id="service-details" class="service-details">
-
-      <div class="container">
-
-        <div class="row gy-5">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="service-box">
-					  <div align="center">
-						  <img src="../image/lexus3is.png" alt="vehicle" width="80%">
-					  </div><br>
-              <div class="services-list">
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Maintenance Dashboard</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Vehicle Information</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Service History</span></a>
-                <a href="#headingThree"><i class="bi bi-arrow-right-circle"></i><span>Owner's Information</span></a>
-              </div>
-            </div><!-- End Services List -->
-
-            <!--div class="service-box">
-              <h4>Resources</h4>
-              <div class="download-catalog">
-                <a href="#"><i class="bi bi-file-earmark-word"></i><span>Download PDF report</span></a>
-              </div>
-            </div--><!-- End Services List -->
-          </div>
-
-          <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-<!--add det-->
-			  	  <div >
+    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
 		  <table class="table table-bordered">
 		  <tr><td colspan="2">
 		<table style="width: 100%">
@@ -204,9 +154,20 @@
 			  </ul>
 			  </td></tr>
 		  </table>
-		<!--vinfo-->			  
-		<div>
-			<p><strong>VIN: </strong>JTHCF1D28E5008692 (Japan)</p>
+		
+		
+		</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Vehicle Information
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+<p><strong>VIN: </strong>JTHCF1D28E5008692 (Japan)</p>
 <p><br/></p>
 <p><strong>Year / Make / Model / Generation / Trim: </strong>2014 / Lexus / IS250 / 3rd / Base</p>
 <p><strong>Color / Code: </strong>Silver Metallic / 1J7</p>
@@ -216,34 +177,52 @@
 <p><strong>Fuel consumption: </strong>10L/100KM</p>
 <p><br/></p>
 <p><strong>Wheel setup: </strong><span id="wheel"></span></p>
-<p><strong>Tires: </strong><span id="tire"></span></p>	
-					      <!--p class="vname">2014 LEXUS IS250</p>
-	<p><strong>VIN: </strong><span id="vin"></span></p>
-	<p><strong>Plate: </strong><span id="plate"></span></p>
-  <p><strong>Last recorded millage: </strong><span id="lastKm"></span></p-->
+<p><strong>Tires: </strong><span id="tire"></span></p>
+		
+		
 		</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Service History
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <table class="table table-bordered" id="history">
+		
 
-					  
-					        <div class="accordion-body">
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Owner Information
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
 <div class="alert alert-info" role="alert">
   If you have found the vehicle's key, please report it to the owner (info below) or return it to the nearest police station.
 </div>
         <p><strong>Name: </strong><span id="ownername"></span></p>
         <p><strong>Email: </strong><span id="owneremail"></span></p>
       </div>
-
+    </div>
+  </div>
+</div>
 	
 </div>
-<!--add det-->
-          </div>
+</div>
 
-        </div>
 
-      </div>
 
-    </section><!-- End Service-details Section -->
-
-  </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
