@@ -68,26 +68,26 @@ d3.csv("https://jayedrafi.com/drmotor/data/JTHCF1D28E5008692.csv", function(data
     } 
 	
 	//tire recommendation
-	var winter = "&#x2717";//false
-	var fall = "&#x2717";//false
-	var summer = "&#x2717";//false
+	var winter = '<i class="bi bi-exclamation-circle"></i>';//false
+	var fall = '<i class="bi bi-exclamation-circle"></i>';//false
+	var summer = '<i class="bi bi-exclamation-circle"></i>';//false
 	
 	if(tire=="All weather"){
-		winter = "&#x2713";//true
-		fall = "&#x2713";//true
-		summer = "&#x2713";//true
+		winter = '<i class=\"bi bi-check-circle\"></i>';//true
+		fall = '<i class="bi bi-check-circle"></i>';//true
+		summer = '<i class="bi bi-check-circle"></i>';//true
 	}
 	else if(tire =="Winter"){
-		winter = "&#x2713";//true
+		winter = '<i class="bi bi-check-circle"></i>';//true
 		
 	}
 	else if(tire == "Summer"){
-		summer = "&#x2713";//true
+		summer = '<i class="bi bi-check-circle"></i>';//true
 		
 	}
 	else if(tire == "All season"){
-		summer = "&#x2713";//true
-		fall = "&#x2713";//true
+		summer = '<i class="bi bi-check-circle"></i>';//true
+		fall = '<i class="bi bi-check-circle"></i>';//true
 	}
 	
 	var setupRec = "";
