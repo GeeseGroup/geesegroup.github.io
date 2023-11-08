@@ -1,4 +1,34 @@
-@charset "utf-8";
+section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  overflow: clip;
+}@charset "utf-8";
 /* CSS Document */
 :root {
   --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto,
