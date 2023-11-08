@@ -51,6 +51,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var lastTranChange = 0; //last mil for cabin air filter
 	var lastPlugChange = 0; //last mil for cabin air filter
 	var lastDiffChange = 0; //last mil for cabin air filter
+	var lastBrakeFluidChange = 0; //last mil for cabin air filter
 	
        for (var i = 0; i < data.length; i++) {
 		   var serviceDetails="";
@@ -80,6 +81,9 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 			   }
 			   if(serviceCode[x]=="15"){
 				   lastDiffChange =data[i].odometer;
+			   }
+			   if(serviceCode[x]=="6"){
+				   lastBrakeFluidChange =data[i].odometer;
 			   }
 			   
 
@@ -130,6 +134,12 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextDiffDue = parseInt(lastDiffChange)+65000;
 	if(nextDiffDue<= lastRepMil){
 		diffdue = "&#x2717";
+	}
+		//diff fluid due
+	var bfluiddue = "&#x2713";//ture ok
+	var nextBfluidDue = parseInt(lastBrakeFluidChange)+48000;
+	if(nextBfluidDue<= lastRepMil){
+		bfluiddue = "&#x2717";
 	}
 	
 	
@@ -186,5 +196,6 @@ d3.select("#cairdu").html(cairdue);
 d3.select("#trandu").html(trandue);
 d3.select("#plug").html(plugdue);
 d3.select("#diffdu").html(diffdue);
+d3.select("#bfluiddu").html(bfluiddue);
 
 });
