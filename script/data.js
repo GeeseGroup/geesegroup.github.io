@@ -67,6 +67,15 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 
     } 
 	
+		//oil change due
+	var oildue = "&#x2713";//ture ok
+	var lastRepMil = parseInt(lastKm);
+	var nextOilDue = parseInt(lastOilChange)+8000;
+	if(nextOilDue<= lastRepMil){
+		oildue="&#x2717";
+	}
+	
+	
 	//tire recommendation
 	var winter = "&#x2717";//false
 	var fall = "&#x2717";//false
@@ -114,5 +123,6 @@ d3.select("#rotaterec").html(setupRec);
 d3.select("#ownername").html(ownername);
 d3.select("#owneremail").html(owneremail);
 d3.select("#lastoil").html(parseInt(lastOilChange)+8000);
+d3.select("#oildu").html(oildue);
 
 });
