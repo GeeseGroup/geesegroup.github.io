@@ -86,7 +86,7 @@
 
         <div class="row gy-4">
           <div class="col-12">
-            <form action="https://formsubmit.co/drmotor.office@gmail.com" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form id="registration-form" action="https://formsubmit.co/drmotor.office@gmail.com" method="post" class="php-email-form" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
 
                 <div class="faq-container">
                     <div class="faq-item faq-active">
@@ -196,12 +196,11 @@
                                         <label for="formFileMultiple" class="rounded-0 form-label">
                                             Upload Carfax, service documents
                                         </label>
-                                        <input name="documents" class="rounded-0 form-control" type="file" id="formFileMultiple" onchange="uploadFiles" multiple>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button class="btn btn-dark" onclick="uploadFiles()">Upload</button>
+                                        <input class="rounded-0 form-control" type="file" id="formFileMultiple" onchange="uploadFiles(event)" multiple>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="_captcha" value="false">
 
                                 <div class="row mt-4">
                                     <div class="col">
@@ -257,7 +256,15 @@
     </section><!-- End Contact Section -->
 
 
-
+    <!-- Preloader -->
+    <div id="loader-container">
+       <div id="preloader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    </div>
 
   </main>
 
@@ -341,26 +348,75 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-     function uploadFiles() {
+
+  const preloader = document.querySelector('#preloader');
+  if (preloader) 
+    preloader.remove();
+
+    
+    let preloaderHtml = `<div id="preloader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>`;
+
+    let count = 1;
+    let links = [];
+
+    function uploadFiles(e) {
         const input = document.getElementById('formFileMultiple');
         const files = input.files;
-        const formData = new FormData();
+        const form = document.body.querySelector("#registration-form");
+        const loader = document.getElementById('loader-container');
+
+        // Show the loader
+        loader.innerHTML = preloaderHtml;
+
+        let promises = []; // Array to hold all fetch promises
 
         for (let i = 0; i < files.length; i++) {
+            const formData = new FormData();
             formData.append('file', files[i]);
+            formData.append('password', 'secret');
+            formData.append('lifetime', '72');
+
+            // Add each fetch promise to the promises array
+            promises.push(
+                fetch('https://safenote.co/api/file', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Add the link to the links array
+                    links.push(data.link.trim());
+                })
+                .catch(error => console.error(error))
+            );
         }
 
-        formData.append('password', 'secret');
-        formData.append('lifetime', '72');
+        // Wait for all fetch promises to complete
+        Promise.all(promises).then(() => {
+            // Create a new input element
+            const inputElement = document.createElement("input");
+            // Set its type to text
+            inputElement.type = "hidden";
+            // Set its name
+            inputElement.name = "Documents"; 
+            // Set its value to the stringified links array
+            inputElement.value = JSON.stringify(links);
+            // Append it to the form
+            form.appendChild(inputElement);
 
-        fetch('https://safenote.co/api/file', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+            console.log(2320);
+
+            // Hide the loader
+            loader.innerHTML = "";
+        });
     }
+
   </script>
 
 </body>
