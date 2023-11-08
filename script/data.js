@@ -98,27 +98,27 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	}
 		//engine air filter due
 	var eairdue = "&#x2713";//ture ok
-	var nextEairDue = parseInt(lastEairChange)+2400;
-	if(nextEairDue<= lastKm){
+	var nextEairDue = parseInt(lastEairChange)+24000;
+	if(nextEairDue<= lastRepMil){
 		eairdue="&#x2717";
 	}
 		//cabin air filter due
 	var cairdue = "&#x2713";//ture ok
-	var nextCairDue = parseInt(lastCairChange)+2400;
-	if(nextCairDue<= lastKm){
+	var nextCairDue = parseInt(lastCairChange)+24000;
+	if(nextCairDue<= lastRepMil){
 		cairdue="&#x2717";
 	}
 		//cabin air filter due
 	var trandue = "&#x2713";//ture ok
 
 	var nextTranDue = parseInt(lastTranChange)+70000;
-	if(nextTranDue<= lastKm){
+	if(nextTranDue<= lastRepMil){
 		trandue = "&#x2717";
 	}
 		//spark plug due
 	var plugdue = "&#x2713";//ture ok
 	var nextPlugDue = parseInt(lastPlugChange)+70000;
-	if(nextPlugDue<= lastKm){
+	if(nextPlugDue<= lastRepMil){
 		plugdue = "&#x2717";
 	}
 	
