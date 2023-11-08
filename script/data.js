@@ -174,6 +174,6 @@ d3.select("#oildu").html(oildue);
 d3.select("#eairdu").html(eairdue);
 d3.select("#cairdu").html(cairdue);
 d3.select("#trandu").html(trandue);
-d3.select("#sparkplug").html(plugdue);
+d3.select("#plug").html(plugdue);
 
 });
