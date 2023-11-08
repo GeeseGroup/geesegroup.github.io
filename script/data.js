@@ -45,7 +45,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var ownername = data[0].owner;
 	var owneremail = data[0].email;
 	var lastOilChange = 0;
-	
+	var lastEairChange = 0; //last mil for engine air filter
 	
        for (var i = 0; i < data.length; i++) {
 		   var serviceDetails="";
@@ -57,7 +57,13 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 			   if(serviceCode[x]=="4"){
 				   lastOilChange=data[i].odometer;
 			   }
+			   //last engine air filter record
+			   if(serviceCode[x]=="8"){
+				   lastEairChange =data[i].odometer;
+			   }
 			   
+
+
 			   serviceDetails+=s[parseInt(serviceCode[x])]+"<br>";
 		   }
 		   
@@ -73,6 +79,13 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextOilDue = parseInt(lastOilChange)+8000;
 	if(nextOilDue<= lastRepMil){
 		oildue="&#x2717";
+	}
+		//engine air filter due
+	var eairdue = "&#x2713";//ture ok
+	var lastEairMil = parseInt(lastEairChange);
+	var nextEairDue = parseInt(lastEairMil)+22000;
+	if(nextEairDue<= lastEairMil){
+		eairdue="&#x2717";
 	}
 	
 	
@@ -124,5 +137,6 @@ d3.select("#ownername").html(ownername);
 d3.select("#owneremail").html(owneremail);
 d3.select("#lastoil").html(parseInt(lastOilChange)+8000);
 d3.select("#oildu").html(oildue);
+d3.select("#eairdu").html(eairdue);
 
 });
