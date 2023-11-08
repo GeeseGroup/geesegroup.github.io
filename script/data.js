@@ -9,7 +9,7 @@ s.push("Wiper replaced.");//3
 s.push("Engine oil and filter replaced.");//4
 s.push("Transmission fluid replaced.");//5
 s.push("Brake fluid replaced.");//6
-s.push("Cbin air filter replaced.");//7
+s.push("Cabin air filter replaced.");//7
 s.push("Engine air filter replaced.");//8
 s.push("suspension checked.");//9
 s.push("Rear suspension checked.");//10
@@ -46,6 +46,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var owneremail = data[0].email;
 	var lastOilChange = 0;
 	var lastEairChange = 0; //last mil for engine air filter
+	var lastCairChange = 0; //last mil for cabin air filter
 	
        for (var i = 0; i < data.length; i++) {
 		   var serviceDetails="";
@@ -60,6 +61,10 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 			   //last engine air filter record
 			   if(serviceCode[x]=="8"){
 				   lastEairChange =data[i].odometer;
+			   }
+			   //last cabin air filter record
+			   if(serviceCode[x]=="7"){
+				   lastCairChange =data[i].odometer;
 			   }
 			   
 
@@ -83,9 +88,16 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		//engine air filter due
 	var eairdue = "&#x2713";//ture ok
 	var lastEairMil = parseInt(lastEairChange);
-	var nextEairDue = parseInt(lastEairMil)+22000;
+	var nextEairDue = parseInt(lastEairMil)+2400;
 	if(nextEairDue<= lastEairMil){
 		eairdue="&#x2717";
+	}
+		//cabin air filter due
+	var cairdue = "&#x2713";//ture ok
+	var lastCairMil = parseInt(lastCairChange);
+	var nextCairDue = parseInt(lastEairMil)+2400;
+	if(nextCairDue<= lastCairMil){
+		cairdue="&#x2717";
 	}
 	
 	
@@ -138,5 +150,6 @@ d3.select("#owneremail").html(owneremail);
 d3.select("#lastoil").html(parseInt(lastOilChange)+8000);
 d3.select("#oildu").html(oildue);
 d3.select("#eairdu").html(eairdue);
+d3.select("#cairdu").html(cairdue);
 
 });
