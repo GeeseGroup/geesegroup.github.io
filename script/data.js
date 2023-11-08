@@ -30,6 +30,7 @@ s.push("Rear wheel bearings / hubs replaced.");//24
 s.push("Rim refinish / fix");//25
 s.push("Replace tires");//26
 s.push("Serviced / recommended service performed.");//28
+s.push("Spark plugs service performed.");//29
 
 
 d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
@@ -48,6 +49,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var lastEairChange = 0; //last mil for engine air filter
 	var lastCairChange = 0; //last mil for cabin air filter
 	var lastTranChange = 0; //last mil for cabin air filter
+	var lastPlugChange = 0; //last mil for cabin air filter
 	
        for (var i = 0; i < data.length; i++) {
 		   var serviceDetails="";
@@ -67,9 +69,13 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 			   if(serviceCode[x]=="7"){
 				   lastCairChange =data[i].odometer;
 			   }
-			   //last cabin air filter record
+			   //last transmission fluid  record
 			   if(serviceCode[x]=="5"){
 				   lastTranChange =data[i].odometer;
+			   }
+			   //last spark plug record
+			   if(serviceCode[x]=="29"){
+				   lastPlugChange =data[i].odometer;
 			   }
 			   
 
@@ -92,24 +98,28 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	}
 		//engine air filter due
 	var eairdue = "&#x2713";//ture ok
-	var lastEairMil = parseInt(lastEairChange);
-	var nextEairDue = parseInt(lastEairMil)+2400;
-	if(nextEairDue<= lastEairMil){
+	var nextEairDue = parseInt(lastEairChange)+2400;
+	if(nextEairDue<= lastKm){
 		eairdue="&#x2717";
 	}
 		//cabin air filter due
 	var cairdue = "&#x2713";//ture ok
-	var lastCairMil = parseInt(lastCairChange);
-	var nextCairDue = parseInt(lastEairMil)+2400;
-	if(nextCairDue<= lastCairMil){
+	var nextCairDue = parseInt(lastCairChange)+2400;
+	if(nextCairDue<= lastKm){
 		cairdue="&#x2717";
 	}
 		//cabin air filter due
 	var trandue = "&#x2713";//ture ok
-	var lastTranMil = parseInt(lastTranChange);
-	var nextTranDue = parseInt(lastEairMil)+70000;
-	if(nextTranDue<= lastTranMil){
+
+	var nextTranDue = parseInt(lastTranChange)+70000;
+	if(nextTranDue<= lastKm){
 		trandue = "&#x2717";
+	}
+		//spark plug due
+	var plugdue = "&#x2713";//ture ok
+	var nextPlugDue = parseInt(lastPlugChange)+70000;
+	if(nextPlugDue<= lastKm){
+		plugdue = "&#x2717";
 	}
 	
 	
@@ -164,5 +174,6 @@ d3.select("#oildu").html(oildue);
 d3.select("#eairdu").html(eairdue);
 d3.select("#cairdu").html(cairdue);
 d3.select("#trandu").html(trandue);
+d3.select("#plugdu").html(plugdue);
 
 });
