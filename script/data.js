@@ -32,7 +32,7 @@ s.push("Replace tires");//26
 s.push("Serviced / recommended service performed.");//28
 
 
-d3.csv("https://jayedrafi.com/drmotor/data/JTHCF1D28E5008692.csv", function(data) {
+d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
     var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
 	var vinNumber = data[0].vin;
 	var licensePlate = data[0].plate;
