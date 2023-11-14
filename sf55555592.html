@@ -122,7 +122,7 @@
                     </div><!-- End Faq item-->
 
                     <div class="faq-item faq-active">
-                        <h3><span class="num">2.</span> <span> Vehicle Information </span></h3>
+                        <h3><span class="num">2.</span> <span> Vehicle Information (First)</span></h3>
                         <div class="faq-content">
                         <div class="row gy-4">
                                 <div class="col-md-6 ">
@@ -149,7 +149,7 @@
 
 
                     <div class="faq-item faq-active">
-                        <h3><span class="num">3.</span> <span> Wheel Information </span></h3>
+                        <h3><span class="num">3.</span> <span> Wheel Information (First)</span></h3>
                         <div class="faq-content">
                         <div class="row gy-4">
                                 <div class="col-md-6">
@@ -199,7 +199,208 @@
                     </div><!-- End Faq item-->
 
                     <div class="faq-item faq-active">
-                        <h3><span class="num">4.</span> <span> Service Information </span></h3>
+                        <h3><span class="num">4.</span> <span> Service Information (First)</span></h3>
+                        <div class="faq-content">
+                            <div class="row gy-4">
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <label for="formFileMultiple" class="rounded-0 form-label">
+                                            Upload service document / history (e.g. CarFax, service receipt)
+                                        </label>
+                                        <input class="rounded-0 form-control" type="file" id="formFileMultiple" onchange="uploadFiles(event)" multiple>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="_captcha" value="false">
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="Additional information" rows="6" placeholder="Include any additional information"></textarea>
+                                </div>
+
+                            </div>
+                            
+                            <small class="mt-3">Note: Dr. Motors' service recommendations are vastly influenced by the provided service history, please ensure all the information is correct.</small>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+                    <div class="faq-item faq-active">
+                        <h3><span class="num">5.</span> <span> Vehicle Information (Second)</span></h3>
+                        <div class="faq-content">
+                        <div class="row gy-4">
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Vin" placeholder="Vin" required>
+                                </div>
+
+
+
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Color" placeholder="Color" required>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Province" placeholder="Province" required>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Plate" placeholder="Plate" required>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+                    <div class="faq-item faq-active">
+                        <h3><span class="num">6.</span> <span> Wheel Information (Second)</span></h3>
+                        <div class="faq-content">
+                        <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select name="Wheel size" class="form-select form-control rounded-0" id="inputGroupSelect01">
+                                            <option selected>Choose Wheel Size...</option>
+                                            <option value="stock">Stock</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select name="Tire type" class="form-select form-control rounded-0" id="inputGroupSelect01">
+                                            <option selected>Choose Tire Type...</option>
+                                            <option value="1">Summer</option>
+                                            <option value="2">Winter</option>
+                                            <option value="3">All Seasons</option>
+                                            <option value="4">All Weather</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+				                    <div class="faq-item faq-active">
+                        <h3><span class="num">4.</span> <span> Service Information (Second)</span></h3>
+                        <div class="faq-content">
+                            <div class="row gy-4">
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <label for="formFileMultiple" class="rounded-0 form-label">
+                                            Upload service document / history (e.g. CarFax, service receipt)
+                                        </label>
+                                        <input class="rounded-0 form-control" type="file" id="formFileMultiple" onchange="uploadFiles(event)" multiple>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="_captcha" value="false">
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="Additional information" rows="6" placeholder="Include any additional information"></textarea>
+                                </div>
+
+                            </div>
+                            
+                            <small class="mt-3">Note: Dr. Motors' service recommendations are vastly influenced by the provided service history, please ensure all the information is correct.</small>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+                    <div class="faq-item faq-active">
+                        <h3><span class="num">5.</span> <span> Vehicle Information (Third)</span></h3>
+                        <div class="faq-content">
+                        <div class="row gy-4">
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Vin" placeholder="Vin" >
+                                </div>
+
+
+
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Color" placeholder="Color" >
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Province" placeholder="Province">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <input type="text" class="form-control" name="Plate" placeholder="Plate">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+
+                    <div class="faq-item faq-active">
+                        <h3><span class="num">6.</span> <span> Wheel Information (Third)</span></h3>
+                        <div class="faq-content">
+                        <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select name="Wheel size" class="form-select form-control rounded-0" id="inputGroupSelect01">
+                                            <option selected>Choose Wheel Size...</option>
+                                            <option value="stock">Stock</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select name="Tire type" class="form-select form-control rounded-0" id="inputGroupSelect01">
+                                            <option selected>Choose Tire Type...</option>
+                                            <option value="1">Summer</option>
+                                            <option value="2">Winter</option>
+                                            <option value="3">All Seasons</option>
+                                            <option value="4">All Weather</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <i class="faq-toggle bi bi-chevron-right"></i> -->
+                    </div><!-- End Faq item-->
+                    <div class="faq-item faq-active">
+                        <h3><span class="num">4.</span> <span> Service Information (Third)</span></h3>
                         <div class="faq-content">
                             <div class="row gy-4">
 
@@ -233,7 +434,7 @@
                     <div class="error-message"></div>
                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                    <button type="submit">Send Application</button>
+                    <button type="submit">Submit</button>
                 </div>
 
             </form>
