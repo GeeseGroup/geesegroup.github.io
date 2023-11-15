@@ -109,7 +109,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 			   }
 			   //last transmission fluid  record
 			   if(serviceCode[x]=="5"){
-				   lastTranChange = parseInt(data[i].odometer);
+				   lastTransmissionFluidChange = parseInt(data[i].odometer);
 			   }
 			   //last spark plug record
 			   if(serviceCode[x]=="29"){
