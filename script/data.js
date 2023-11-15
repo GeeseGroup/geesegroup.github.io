@@ -34,6 +34,25 @@ s.push("Spark plugs service performed.");//29
 
 
 d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
+	const ok = "&#x2713";//tick
+	const no = "&#x2717";//cross
+	const oilChangeDuration = 8000;
+	const engineAirFilterDuration = 24000;
+	const cabinAirFilterDuration = 24000;
+	const sparkPlugDuration = 24000;
+	const timingBeltDuration = 100000;
+	const serpentineBeltDuration = 100000;
+	const transmissionFluidDuration = 70000;
+	const difFluidDuration = 65000;
+	const brakeFluidDuration = 65000;
+	
+		var winter = no;
+	var fall = no;
+	var summer = no;
+	 
+	
+	
+	
     var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
 	var vinNumber = data[0].vin;
 	var licensePlate = data[0].plate;
@@ -95,70 +114,83 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		   
         myd+="<tr><td>"+data[i].date+"</td><td>"+data[i].odometer+"</td><td>"+data[i].source+"</td><td>"+serviceDetails+"</td></tr>";
 
-    } 
+    }
 	
-		//oil change due
-	var oildue = "&#x2713";//ture ok
+
+	
+	//oil change
+	//Every 8000km
+	var oildue = ok;
 	var lastRepMil = parseInt(lastKm);
 	var nextOilDue = parseInt(lastOilChange)+8000;
 	if(nextOilDue<= lastRepMil){
-		oildue="&#x2717";
+		oildue=no;
 	}
-		//engine air filter due
-	var eairdue = "&#x2713";//ture ok
+	
+	//engine air filter
+	//every 24000km
+	var eairdue = ok;//ture ok
 	var nextEairDue = parseInt(lastEairChange)+24000;
 	if(nextEairDue<= lastRepMil){
-		eairdue="&#x2717";
+		eairdue=no;
 	}
-		//cabin air filter due
-	var cairdue = "&#x2713";//ture ok
+	
+	//cabin air filter
+	//every 24000km
+	var cairdue = ok;//ture ok
 	var nextCairDue = parseInt(lastCairChange)+24000;
 	if(nextCairDue<= lastRepMil){
-		cairdue="&#x2717";
+		cairdue=no;
 	}
-		//cabin air filter due
-	var trandue = "&#x2713";//ture ok
-
+	
+	//transmission fluid
+	//every 70000km
+	var trandue = ok;//ture ok
 	var nextTranDue = parseInt(lastTranChange)+70000;
 	if(nextTranDue<= lastRepMil){
-		trandue = "&#x2717";
+		trandue = no;
 	}
-		//spark plug due
-	var plugdue = "&#x2713";//ture ok
+	
+	//spark plug
+	//every 7000km
+	var plugdue = ok;//ture ok
 	var nextPlugDue = parseInt(lastPlugChange)+70000;
 	if(nextPlugDue<= lastRepMil){
-		plugdue = "&#x2717";
+		plugdue = no;
 	}
-		//diff fluid due
-	var diffdue = "&#x2713";//ture ok
+	
+	//diff fluid
+	//every 65000km
+	var diffdue = ok;//ture ok
 	var nextDiffDue = parseInt(lastDiffChange)+65000;
 	if(nextDiffDue<= lastRepMil){
-		diffdue = "&#x2717";
+		diffdue =no;
 	}
-		//diff fluid due
-	var bfluiddue = "&#x2713";//ture ok
+	
+	//diff fluid due
+	var bfluiddue = ok;//ture ok
 	var nextBfluidDue = parseInt(lastBrakeFluidChange)+48000;
 	if(nextBfluidDue<= lastRepMil){
-		bfluiddue = "&#x2717";
+		bfluiddue = no;
 	}
 	
 	
 	//tire recommendation
-	var winter = "&#x2717";//false
-	var fall = "&#x2717";//false
-	var summer = "&#x2717";//false
-	
+	//summer tire: summer
+	//winter tire: fall and winter
+	//all season tire: summer and fall
+	//all weather tire: summer, fall and winter
 	if(tire=="All weather"){
-		winter = "&#x2713";//true
-		fall = "&#x2713";//true
-		summer = "&#x2713";//true
+		winter = ok;
+		fall = ok;
+		summer = ok;
 	}
 	else if(tire =="Winter"){
-		winter = "&#x2713";//true
+		winter = ok;
 		
 	}
 	else if(tire == "Summer"){
-		summer = "&#x2713";//true
+		summer = ok;
 		
 	}
 	else if(tire == "All season"){
