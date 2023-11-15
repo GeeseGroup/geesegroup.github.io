@@ -146,7 +146,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 24000km
 	var nextEngineAirFilterDue = lastEngineAirFilterChange+ENGINE_AIR_FILTER_DURATION;
 	if(nextEngineAirFilterDue<= LAST_REPORTED_KM){
-		engineAirfilterValid=NO;
+		engineAirFilterValid=NO;
 	}
 	
 	//cabin air filter
@@ -179,7 +179,6 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	}
 	
 	//diff fluid due
-	var brakeFluidValid = YES;
 	var nextBrakeFluidDue = lastBrakeFluidChange+BRAKE_FLUID_DURATION;
 	if(nextBrakeFluidDue<= LAST_REPORTED_KM){
 		brakeFluidValid = NO;
@@ -242,7 +241,7 @@ d3.select("#ownername").html(ownerName);
 d3.select("#owneremail").html(ownerEmail);
 d3.select("#lastoil").html(lastOilChange);
 d3.select("#oildu").html(engineOilValid);
-d3.select("#eairdu").html(engineAirfilterValid);
+d3.select("#eairdu").html(engineAirFilterValid);
 d3.select("#cairdu").html(cabinAirFilterValid);
 d3.select("#trandu").html(transmissionFluidValid);
 d3.select("#plug").html(sparkPlugValid);
