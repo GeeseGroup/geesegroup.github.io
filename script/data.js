@@ -234,7 +234,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	summary+="</ul>";
 	
 	
-const xValues = ["Done", "Pending"];
+const xValues = [];
 const yValues = [8, maintenanceDueItems.length];
 const barColors = [
   "#06d6a0",
