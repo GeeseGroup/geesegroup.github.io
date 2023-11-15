@@ -36,8 +36,8 @@ s.push("Spark plugs service performed.");//29
 d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 	//true false alternative
-	const YES = "&#x2713";//tick
-	const NO = "&#x2717";//cross
+	var YES = "&#x2713";//tick
+	var NO = "&#x2717";//cross
 	
 	//service intervals
 	const OIL_CHANGE_DURATION = 8000;
