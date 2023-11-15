@@ -45,11 +45,11 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	const transmissionFluidDuration = 70000;
 	const difFluidDuration = 65000;
 	const brakeFluidDuration = 65000;
-	
-		var winter = no;
+	const lastReportedKm = parseInt(data[data.length-1].odometer);
+	var winter = no;
 	var fall = no;
 	var summer = no;
-	 
+	var oildue = ok;
 	
 	
 	
@@ -57,7 +57,6 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var vinNumber = data[0].vin;
 	var licensePlate = data[0].plate;
 	var location = data[0].location;
-	var lastKm = data[data.length-1].odometer;
 	var wheelSize = data[0].wsize;
 	var wheelMaterial = data[0].wmaterial;
 	var wheelSetup = data[0].wsetup;
@@ -120,10 +119,8 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 	//oil change
 	//Every 8000km
-	var oildue = ok;
-	var lastRepMil = parseInt(lastKm);
-	var nextOilDue = parseInt(lastOilChange)+8000;
-	if(nextOilDue<= lastRepMil){
+	var nextOilDue = parseInt(lastOilChange)+oilChangeDuration;
+	if(nextOilDue<= lastReportedKm){
 		oildue=no;
 	}
 	
@@ -131,7 +128,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 24000km
 	var eairdue = ok;//ture ok
 	var nextEairDue = parseInt(lastEairChange)+24000;
-	if(nextEairDue<= lastRepMil){
+	if(nextEairDue<= lastReportedKm){
 		eairdue=no;
 	}
 	
@@ -139,7 +136,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 24000km
 	var cairdue = ok;//ture ok
 	var nextCairDue = parseInt(lastCairChange)+24000;
-	if(nextCairDue<= lastRepMil){
+	if(nextCairDue<= lastReportedKm){
 		cairdue=no;
 	}
 	
@@ -147,7 +144,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 70000km
 	var trandue = ok;//ture ok
 	var nextTranDue = parseInt(lastTranChange)+70000;
-	if(nextTranDue<= lastRepMil){
+	if(nextTranDue<= lastReportedKm){
 		trandue = no;
 	}
 	
@@ -155,7 +152,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 7000km
 	var plugdue = ok;//ture ok
 	var nextPlugDue = parseInt(lastPlugChange)+70000;
-	if(nextPlugDue<= lastRepMil){
+	if(nextPlugDue<= lastReportedKm){
 		plugdue = no;
 	}
 	
@@ -163,23 +160,23 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//every 65000km
 	var diffdue = ok;//ture ok
 	var nextDiffDue = parseInt(lastDiffChange)+65000;
-	if(nextDiffDue<= lastRepMil){
+	if(nextDiffDue<= lastReportedKm){
 		diffdue =no;
 	}
 	
 	//diff fluid due
 	var bfluiddue = ok;//ture ok
 	var nextBfluidDue = parseInt(lastBrakeFluidChange)+48000;
-	if(nextBfluidDue<= lastRepMil){
+	if(nextBfluidDue<= lastReportedKm){
 		bfluiddue = no;
 	}
 	
 	
 	//tire recommendation
-	//summer tire: summer
-	//winter tire: fall and winter
-	//all season tire: summer and fall
 	//all weather tire: summer, fall and winter
+	//winter tire: fall and winter
+	//summer tire: summer
+	//all season tire: summer and fall
 	if(tire=="All weather"){
 		winter = ok;
 		fall = ok;
@@ -194,8 +191,8 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		
 	}
 	else if(tire == "All season"){
-		summer = "&#x2713";//true
-		fall = "&#x2713";//true
+		summer = ok;
+		fall = ok;
 	}
 	
 	var setupRec = "";
@@ -212,7 +209,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 d3.select("#history").html(myd);
 d3.select("#vin").html(vinNumber);
 d3.select("#plate").html(licensePlate+" ("+location+")");
-d3.select("#lastKm").html(lastKm+" KM");
+d3.select("#lastKm").html(lastReportedKm+" KM");
 d3.select("#wheel").html(wheelSize+" inch / "+wheelMaterial+" / "+wheelSetup);
 d3.select("#tire").html(tire);
 d3.select("#wintertire").html(winter);
