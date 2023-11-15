@@ -34,8 +34,12 @@ s.push("Spark plugs service performed.");//29
 
 
 d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
+	
+	//true false alternative
 	const ok = "&#x2713";//tick
 	const no = "&#x2717";//cross
+	
+	//service intervals
 	const oilChangeDuration = 8000;
 	const engineAirFilterDuration = 24000;
 	const cabinAirFilterDuration = 24000;
@@ -45,24 +49,31 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	const transmissionFluidDuration = 70000;
 	const difFluidDuration = 65000;
 	const brakeFluidDuration = 65000;
+	const tireRotationDuration = 10000;
+	
+	//vehicle data
+	const vinNumber = data[0].vin;
 	const lastReportedKm = parseInt(data[data.length-1].odometer);
-	var winter = no;
-	var fall = no;
-	var summer = no;
-	var oildue = ok;
-	
-	
-	
-    var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
-	var vinNumber = data[0].vin;
-	var licensePlate = data[0].plate;
+	const licensePlate = data[0].plate;
 	var location = data[0].location;
 	var wheelSize = data[0].wsize;
 	var wheelMaterial = data[0].wmaterial;
 	var wheelSetup = data[0].wsetup;
 	var tire = data[0].tire;
-	var ownername = data[0].owner;
-	var owneremail = data[0].email;
+	var ownerName = data[0].owner;
+	var ownerEmail = data[0].email;
+
+
+	//gobal variables
+	var winter = no;
+	var fall = no;
+	var summer = no;
+	var oildue = ok;
+	var tireRotationAdvice = "Unavailable.";
+	
+	
+    var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
+
 	var lastOilChange = 0;
 	var lastEairChange = 0; //last mil for engine air filter
 	var lastCairChange = 0; //last mil for cabin air filter
@@ -195,13 +206,15 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		fall = ok;
 	}
 	
-	var setupRec = "";
-	//staggered setup or square setup
+
+	//wheel setup recommendation
+	//square setup: rotate
+	//staggered: flip tire inside out or swap left to right
 	if(wheelSetup == "Staggered"){
-		setupRec = "Flip tires inside out or swap them left to right in every 6 months or every 10000 KM."
+		tireRotationAdvice = "Flip tires inside out or swap them left to right in every 6 months or every "+tireRotationDuration+" KM.";
 	}
 	if(wheelSetup == "Square"){
-		setupRec = "Rotate your tires in every 6 months or every 10000 KM."
+		tireRotationAdvice = "Rotate your tires in every 6 months or every "+tireRotationDuration+" KM.";
 	}
 	
 	
@@ -215,9 +228,9 @@ d3.select("#tire").html(tire);
 d3.select("#wintertire").html(winter);
 d3.select("#falltire").html(fall);
 d3.select("#summertire").html(summer);
-d3.select("#rotaterec").html(setupRec);
-d3.select("#ownername").html(ownername);
-d3.select("#owneremail").html(owneremail);
+d3.select("#rotaterec").html(tireRotationAdvice);
+d3.select("#ownername").html(ownerName);
+d3.select("#owneremail").html(ownerEmail);
 d3.select("#lastoil").html(parseInt(lastOilChange)+8000);
 d3.select("#oildu").html(oildue);
 d3.select("#eairdu").html(eairdue);
