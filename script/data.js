@@ -77,7 +77,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var brakeFluidValid = YES;
 
 	var tireRotationAdvice = "Unavailable.";
-	
+	var maintenanceDueItems = [];
 	
     var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
 
@@ -140,6 +140,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextOilDue = lastOilChange+OIL_CHANGE_DURATION;
 	if(nextOilDue<= LAST_REPORTED_KM){
 		engineOilValid=NO;//oil is due
+		maintenanceDueItems.push("Oil &amp; filter replace.");
 	}
 	
 	//engine air filter
@@ -147,6 +148,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextEngineAirFilterDue = lastEngineAirFilterChange+ENGINE_AIR_FILTER_DURATION;
 	if(nextEngineAirFilterDue<= LAST_REPORTED_KM){
 		engineAirFilterValid=NO;
+		maintenanceDueItems.push("Engine air filter check/replace.");
 	}
 	
 	//cabin air filter
@@ -155,6 +157,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextCabinAirFilterDue = lastCabinAirFilterChange+CABIN_AIR_FILTER_DURATION;
 	if(nextCabinAirFilterDue<= LAST_REPORTED_KM){
 		cabinAirFilterValid=NO;
+		maintenanceDueItems.push("Cabin air filter check/replace.");
 	}
 	
 	//transmission fluid
@@ -162,6 +165,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextTransmissionFluidDue = lastTransmissionFluidChange+TRANSMISSION_FLUID_DURATION;
 	if(nextTransmissionFluidDue<= LAST_REPORTED_KM){
 		transmissionFluidValid = NO;
+		maintenanceDueItems.push("Transmission fluid flush/replace.");
 	}
 	
 	//spark plug
@@ -169,6 +173,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextSparkPlugDue = lastSparkPlugChange+SPARK_PLUG_DURATION;
 	if(nextSparkPlugDue<= LAST_REPORTED_KM){
 		sparkPlugValid = NO;
+		maintenanceDueItems.push("SparkPlug service.");
 	}
 	
 	//diff fluid
@@ -176,12 +181,14 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextDiffFluidDue = lastDiffFluidChange+DIFF_FLUID_DURATION;
 	if(nextDiffFluidDue<= LAST_REPORTED_KM){
 		diffFluidValid =NO;
+		maintenanceDueItems.push("Differential fluid replace.");
 	}
 	
 	//diff fluid due
 	var nextBrakeFluidDue = lastBrakeFluidChange+BRAKE_FLUID_DURATION;
 	if(nextBrakeFluidDue<= LAST_REPORTED_KM){
 		brakeFluidValid = NO;
+		maintenanceDueItems.push("Brake fluid replace.");
 	}
 	
 	
@@ -220,9 +227,11 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	}
 	
 	//summary for dues
-	var summaryTotoal ="<ul>";
-	
-	summaryTotoal+="</ul>";
+	var summary ="<ul>";
+	for(let k=0; k<maintenanceDueItems.length; k++){
+		summary+="<li>"+maintenanceDueItems[k]+"</li>";
+	}
+	summary+="</ul>";
 	
 	
 	
@@ -247,5 +256,6 @@ d3.select("#trandu").html(transmissionFluidValid);
 d3.select("#plug").html(sparkPlugValid);
 d3.select("#diffdu").html(diffFluidValid);
 d3.select("#bfluiddu").html(brakeFluidValid);
+d3.select("#summary").html(summary);
 
 });
