@@ -173,7 +173,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var nextSparkPlugDue = lastSparkPlugChange+SPARK_PLUG_DURATION;
 	if(nextSparkPlugDue<= LAST_REPORTED_KM){
 		sparkPlugValid = NO;
-		maintenanceDueItems.push("SparkPlug service.");
+		maintenanceDueItems.push("SparkPlug check/replace.");
 	}
 	
 	//diff fluid
@@ -184,7 +184,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		maintenanceDueItems.push("Differential fluid replace.");
 	}
 	
-	//diff fluid due
+	//brake fluid
 	var nextBrakeFluidDue = lastBrakeFluidChange+BRAKE_FLUID_DURATION;
 	if(nextBrakeFluidDue<= LAST_REPORTED_KM){
 		brakeFluidValid = NO;
