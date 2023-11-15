@@ -234,7 +234,29 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	summary+="</ul>";
 	
 	
-	
+const xValues = ["Done", "Pending"];
+const yValues = [8, maintenanceDueItems.length];
+const barColors = [
+  "#06d6a0",
+  "#ef476f"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: false,
+      text: ""
+    }
+  }
+});	
 
 d3.select("#history").html(myd);
 d3.select("#vin").html(VIN_NUMBER);
