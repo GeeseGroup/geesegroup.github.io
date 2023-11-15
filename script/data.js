@@ -239,7 +239,7 @@ d3.select("#summertire").html(summer);
 d3.select("#rotaterec").html(tireRotationAdvice);
 d3.select("#ownername").html(ownerName);
 d3.select("#owneremail").html(ownerEmail);
-d3.select("#lastoil").html(lastOilChange);
+d3.select("#lastoil").html(nextOilDue);
 d3.select("#oildu").html(engineOilValid);
 d3.select("#eairdu").html(engineAirFilterValid);
 d3.select("#cairdu").html(cabinAirFilterValid);
