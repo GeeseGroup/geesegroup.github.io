@@ -208,7 +208,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 
 	//wheel setup recommendation
-	//square setup: rotate
+	//square: rotate
 	//staggered: flip tire inside out or swap left to right
 	if(wheelSetup == "Staggered"){
 		tireRotationAdvice = "Flip tires inside out or swap them left to right in every 6 months or every "+tireRotationDuration+" KM.";
