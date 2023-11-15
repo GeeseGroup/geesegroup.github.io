@@ -86,7 +86,7 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var lastCabinAirFilterChange = 0; //last mil for cabin air filter
 	var lastTransmissionFluidChange = 0; //last mil for cabin air filter
 	var lastSparkPlugChange = 0; //last mil for cabin air filter
-	var nextDiffDue = 0; //last mil for cabin air filter
+	var lastDiffFluidChange = 0; //last mil for cabin air filter
 	var lastBrakeFluidChange = 0; //last mil for cabin air filter
 	
        for (var i = 0; i < data.length; i++) {
@@ -97,29 +97,29 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		   //last oil change and service record
 		   for(var x=0; x<serviceCode.length; x++){
 			   if(serviceCode[x]=="4"){
-				   lastOilChange=parseInt(data[i].odometer);
+				   lastOilChange= parseInt(data[i].odometer);
 			   }
 			   //last engine air filter record
 			   if(serviceCode[x]=="8"){
-				   lastEngineAirFilterChange =parseInt(data[i].odometer);
+				   lastEngineAirFilterChange = parseInt(data[i].odometer);
 			   }
 			   //last cabin air filter record
 			   if(serviceCode[x]=="7"){
-				   lastCabinAirFilterChange =parseInt(data[i].odometer);
+				   lastCabinAirFilterChange = parseInt(data[i].odometer);
 			   }
 			   //last transmission fluid  record
 			   if(serviceCode[x]=="5"){
-				   lastTranChange =parseInt(data[i].odometer);
+				   lastTranChange = parseInt(data[i].odometer);
 			   }
 			   //last spark plug record
 			   if(serviceCode[x]=="29"){
 				   lastSparkPlugChange = parseInt(data[i].odometer);
 			   }
 			   if(serviceCode[x]=="15"){
-				   nextDiffDue = parseInt(data[i].odometer);
+				   lastDiffFluidChange = parseInt(data[i].odometer);
 			   }
 			   if(serviceCode[x]=="6"){
-				   lastBrakeFluidChange =parseInt(data[i].odometer);
+				   lastBrakeFluidChange = parseInt(data[i].odometer);
 			   }
 			   
 
@@ -173,8 +173,8 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 	//diff fluid
 	//every 65000km
-	var nextDiffDue = lastDiffFluidChange+DIFF_FLUID_DURATION;
-	if(nextDiffDue<= LAST_REPORTED_KM){
+	var nextDiffFluidDue = lastDiffFluidChange+DIFF_FLUID_DURATION;
+	if(nextDiffFluidDue<= LAST_REPORTED_KM){
 		diffFluidValid =NO;
 	}
 	
