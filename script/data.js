@@ -36,24 +36,24 @@ s.push("Spark plugs service performed.");//29
 d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 	//true false alternative
-	const ok = "&#x2713";//tick
-	const no = "&#x2717";//cross
+	const YES = "&#x2713";//tick
+	const NO = "&#x2717";//cross
 	
 	//service intervals
-	const oilChangeDuration = 8000;
-	const engineAirFilterDuration = 24000;
-	const cabinAirFilterDuration = 24000;
-	const sparkPlugDuration = 24000;
-	const timingBeltDuration = 100000;
-	const serpentineBeltDuration = 100000;
-	const transmissionFluidDuration = 70000;
-	const difFluidDuration = 65000;
-	const brakeFluidDuration = 65000;
-	const tireRotationDuration = 10000;
+	const OIL_CHANGE_DURATION = 8000;
+	const ENGINE_AIR_FILTER_DURATION = 24000;
+	const CABIN_AIR_FILTER_DURATION = 24000;
+	const SPARK_PLUG_DURATION = 24000;
+	const TIMING_BELT_DURATION = 100000;
+	const SERPENTINE_BELT_DURATION = 100000;
+	const TRANSMISSION_FLUID_DURATION = 70000;
+	const DIFF_FLUID_DURATION = 65000;
+	const BRAKE_FLUID_DURATION = 65000;
+	const TIRE_ROTATION_DURATION = 10000;
 	
 	//vehicle data
-	const vinNumber = data[0].vin;
-	const lastReportedKm = parseInt(data[data.length-1].odometer);
+	const VIN_NUMBER = data[0].vin;
+	const LAST_REPORTED_KM = parseInt(data[data.length-1].odometer);
 	const licensePlate = data[0].plate;
 	var location = data[0].location;
 	var wheelSize = data[0].wsize;
@@ -64,22 +64,29 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	var ownerEmail = data[0].email;
 
 
-	//gobal variables
-	var winter = no;
-	var fall = no;
-	var summer = no;
-	var oildue = ok;
+	//gobal variables initialization
+	var winter = NO;
+	var fall = NO;
+	var summer = NO;
+	var engineOilValid = YES;
+	var engineAirFilterValid = YES;
+	var cabinAirFilterValid = YES;
+		var transmissionFluidValid = YES;
+		var sparkPlugValid = YES;
+	var diffFluidValid = YES;
+	var brakeFluidValid = YES;
+
 	var tireRotationAdvice = "Unavailable.";
 	
 	
     var myd="<tr><th>Date</th><th>Odometer</th><th>Source</th><th>Details</th></tr>";
 
 	var lastOilChange = 0;
-	var lastEairChange = 0; //last mil for engine air filter
-	var lastCairChange = 0; //last mil for cabin air filter
-	var lastTranChange = 0; //last mil for cabin air filter
-	var lastPlugChange = 0; //last mil for cabin air filter
-	var lastDiffChange = 0; //last mil for cabin air filter
+	var lastEngineAirFilterChange = 0; //last mil for engine air filter
+	var lastCabinAirFilterChange = 0; //last mil for cabin air filter
+	var lastTransmissionFluidChange = 0; //last mil for cabin air filter
+	var lastSparkPlugChange = 0; //last mil for cabin air filter
+	var nextDiffDue = 0; //last mil for cabin air filter
 	var lastBrakeFluidChange = 0; //last mil for cabin air filter
 	
        for (var i = 0; i < data.length; i++) {
@@ -90,29 +97,29 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		   //last oil change and service record
 		   for(var x=0; x<serviceCode.length; x++){
 			   if(serviceCode[x]=="4"){
-				   lastOilChange=data[i].odometer;
+				   lastOilChange=parseInt(data[i].odometer);
 			   }
 			   //last engine air filter record
 			   if(serviceCode[x]=="8"){
-				   lastEairChange =data[i].odometer;
+				   lastEngineAirFilterChange =parseInt(data[i].odometer);
 			   }
 			   //last cabin air filter record
 			   if(serviceCode[x]=="7"){
-				   lastCairChange =data[i].odometer;
+				   lastCabinAirFilterChange =parseInt(data[i].odometer);
 			   }
 			   //last transmission fluid  record
 			   if(serviceCode[x]=="5"){
-				   lastTranChange =data[i].odometer;
+				   lastTranChange =parseInt(data[i].odometer);
 			   }
 			   //last spark plug record
 			   if(serviceCode[x]=="29"){
-				   lastPlugChange =data[i].odometer;
+				   lastSparkPlugChange = parseInt(data[i].odometer);
 			   }
 			   if(serviceCode[x]=="15"){
-				   lastDiffChange =data[i].odometer;
+				   nextDiffDue = parseInt(data[i].odometer);
 			   }
 			   if(serviceCode[x]=="6"){
-				   lastBrakeFluidChange =data[i].odometer;
+				   lastBrakeFluidChange =parseInt(data[i].odometer);
 			   }
 			   
 
@@ -130,56 +137,52 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	
 	//oil change
 	//Every 8000km
-	var nextOilDue = parseInt(lastOilChange)+oilChangeDuration;
-	if(nextOilDue<= lastReportedKm){
-		oildue=no;
+	var nextOilDue = lastOilChange+OIL_CHANGE_DURATION;
+	if(nextOilDue<= LAST_REPORTED_KM){
+		engineOilValid=NO;//oil is due
 	}
 	
 	//engine air filter
 	//every 24000km
-	var eairdue = ok;//ture ok
-	var nextEairDue = parseInt(lastEairChange)+24000;
-	if(nextEairDue<= lastReportedKm){
-		eairdue=no;
+	var nextEngineAirFilterDue = lastEngineAirFilterChange+ENGINE_AIR_FILTER_DURATION;
+	if(nextEngineAirFilterDue<= LAST_REPORTED_KM){
+		engineAirfilterValid=NO;
 	}
 	
 	//cabin air filter
 	//every 24000km
-	var cairdue = ok;//ture ok
-	var nextCairDue = parseInt(lastCairChange)+24000;
-	if(nextCairDue<= lastReportedKm){
-		cairdue=no;
+
+	var nextCabinAirFilterDue = lastCabinAirFilterChange+CABIN_AIR_FILTER_DURATION;
+	if(nextCabinAirFilterDue<= LAST_REPORTED_KM){
+		cabinAirFilterValid=NO;
 	}
 	
 	//transmission fluid
 	//every 70000km
-	var trandue = ok;//ture ok
-	var nextTranDue = parseInt(lastTranChange)+70000;
-	if(nextTranDue<= lastReportedKm){
-		trandue = no;
+	var nextTransmissionFluidDue = lastTransmissionFluidChange+TRANSMISSION_FLUID_DURATION;
+	if(nextTransmissionFluidDue<= LAST_REPORTED_KM){
+		transmissionFluidValid = NO;
 	}
 	
 	//spark plug
-	//every 7000km
-	var plugdue = ok;//ture ok
-	var nextPlugDue = parseInt(lastPlugChange)+70000;
-	if(nextPlugDue<= lastReportedKm){
-		plugdue = no;
+	//every 70000km
+	var nextSparkPlugDue = lastSparkPlugChange+SPARK_PLUG_DURATION;
+	if(nextSparkPlugDue<= LAST_REPORTED_KM){
+		sparkPlugValid = NO;
 	}
 	
 	//diff fluid
 	//every 65000km
-	var diffdue = ok;//ture ok
-	var nextDiffDue = parseInt(lastDiffChange)+65000;
-	if(nextDiffDue<= lastReportedKm){
-		diffdue =no;
+	var nextDiffDue = lastDiffFluidChange+DIFF_FLUID_DURATION;
+	if(nextDiffDue<= LAST_REPORTED_KM){
+		diffFluidValid =NO;
 	}
 	
 	//diff fluid due
-	var bfluiddue = ok;//ture ok
-	var nextBfluidDue = parseInt(lastBrakeFluidChange)+48000;
-	if(nextBfluidDue<= lastReportedKm){
-		bfluiddue = no;
+	var brakeFluidValid = YES;
+	var nextBrakeFluidDue = lastBrakeFluidChange+BRAKE_FLUID_DURATION;
+	if(nextBrakeFluidDue<= LAST_REPORTED_KM){
+		brakeFluidValid = NO;
 	}
 	
 	
@@ -189,21 +192,21 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 	//summer tire: summer
 	//all season tire: summer and fall
 	if(tire=="All weather"){
-		winter = ok;
-		fall = ok;
-		summer = ok;
+		winter = YES;
+		fall = YES;
+		summer = YES;
 	}
 	else if(tire =="Winter"){
-		winter = ok;
+		winter = YES;
 		
 	}
 	else if(tire == "Summer"){
-		summer = ok;
+		summer = YES;
 		
 	}
 	else if(tire == "All season"){
-		summer = ok;
-		fall = ok;
+		summer = YES;
+		fall = YES;
 	}
 	
 
@@ -217,12 +220,18 @@ d3.csv("https://drmotor.ca/data/JTHCF1D28E5008692.csv", function(data) {
 		tireRotationAdvice = "Rotate your tires in every 6 months or every "+tireRotationDuration+" KM.";
 	}
 	
+	//summary for dues
+	var summaryTotoal ="<ul>";
+	
+	summaryTotoal+="</ul>";
+	
+	
 	
 
 d3.select("#history").html(myd);
-d3.select("#vin").html(vinNumber);
+d3.select("#vin").html(VIN_NUMBER);
 d3.select("#plate").html(licensePlate+" ("+location+")");
-d3.select("#lastKm").html(lastReportedKm+" KM");
+d3.select("#lastKm").html(LAST_REPORTED_KM+" KM");
 d3.select("#wheel").html(wheelSize+" inch / "+wheelMaterial+" / "+wheelSetup);
 d3.select("#tire").html(tire);
 d3.select("#wintertire").html(winter);
@@ -232,12 +241,12 @@ d3.select("#rotaterec").html(tireRotationAdvice);
 d3.select("#ownername").html(ownerName);
 d3.select("#owneremail").html(ownerEmail);
 d3.select("#lastoil").html(parseInt(lastOilChange)+8000);
-d3.select("#oildu").html(oildue);
-d3.select("#eairdu").html(eairdue);
-d3.select("#cairdu").html(cairdue);
-d3.select("#trandu").html(trandue);
-d3.select("#plug").html(plugdue);
-d3.select("#diffdu").html(diffdue);
-d3.select("#bfluiddu").html(bfluiddue);
+d3.select("#oildu").html(engineOilValid);
+d3.select("#eairdu").html(engineAirfilterValid);
+d3.select("#cairdu").html(cabinAirFilterValid);
+d3.select("#trandu").html(transmissionFluidValid);
+d3.select("#plug").html(sparkPlugValid);
+d3.select("#diffdu").html(diffFluidValid);
+d3.select("#bfluiddu").html(brakeFluidValid);
 
 });
